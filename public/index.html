@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <!--MATERIAL ICONS-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+  rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="login.css">
+</head>
+
+<body>
+  <section class="container">
+
+    <form>
+
+      <!-- <button class="btn btn-ghost">
+        <img src="https://i.ibb.co/w03zJ3Q/google.png" alt="google">
+        Log in with Google
+      </button> -->
+
+      <!-- <small>or</small> -->
+
+      <style>
+        .form-control {
+          width: 300px; /* Adjust the width as needed */
+          overflow: hidden; /* Hide any overflowing content */
+          
+        }
+    
+        inputphone {
+          white-space: nowrap; /* Prevent text from wrapping to the next line */
+          display: inline-block; /* Ensure label stays in one line */
+          animation: scrollText 10s linear infinite; /* Adjust the duration as needed */
+        }
+    
+        @keyframes scrollText {
+          0% {
+            transform: translateX(100%); /* Start from the right */
+          }
+          100% {
+            transform: translateX(-100%); /* Move to the left */
+          }
+        }
+    
+        input {
+          /* Additional styles for the input if needed */
+          width: 100%;
+          box-sizing: border-box;
+        }
+      </style>
+      <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></script>
+
+    </head>
+  
+    
+    <div class="form-control">
+      <label for="phone" class="scrolling-text">
+        <!-- Your label text goes here -->
+        Phone Number
+      </label>
+      <input type="phone" id="phone" placeholder="+254...">
+    </div>
+
+      <div class="form-control">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email">
+      </div>
+
+      <div class="form-control">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Password">
+      </div>
+
+
+      <button id="myButton" class="btn" onclick="loginUserWithPhoneNumber()">Join Us</button>
+
+      <div id="recaptcha-container"></div>
+
+    </form>
+    <script>
+
+      // Initialize Firebase with your Firebase project configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDmJpKmYX9lZO_m4CbT9WuNXvM07d6MJS0",
+        authDomain: "healthdoc-edd66.firebaseapp.com",
+        databaseURL: "https://healthdoc-edd66-default-rtdb.firebaseio.com",
+        projectId: "healthdoc-edd66",
+        storageBucket: "healthdoc-edd66.appspot.com",
+        messagingSenderId: "210644864503",
+        appId: "1:210644864503:web:82a22a5a92a4402e2572f2"
+      };
+      
+      
+  firebase.initializeApp(firebaseConfig);
+
+
+  if (firebase) {
+    console.log('Firebase is initialized successfully.');
+    console.log('Firebase Auth:', firebase.auth());
+    // console.log('Other Firebase services:', firebase.firestore(), firebase.storage());
+
+    // Listen for authentication state changes
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in
+        console.log('User is signed in:', user.uid);
+      } else {
+        // User is signed out
+        console.log('User is signed out.');
+      }
+    });
+
+  } else {
+    console.error('Firebase initialization failed.');
+  }
+
+
+  // Function to handle form submission with phone number
+  function loginUserWithPhoneNumber() {
+    var phoneNumber = document.getElementById('phone').value;
+
+    // Use Firebase Authentication for phone number verification
+    var appVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+
+    firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+      .then((confirmationResult) => {
+        // Save the confirmation result to use in the OTP verification page
+        window.confirmationResult = confirmationResult;
+
+        // Redirect to the OTP verification page
+        window.location.href = "/loginotp.html"; // Replace with your desired URL
+      })
+      .catch((error) => {
+        console.error('Phone authentication error:', error.message);
+        // Handle authentication errors (display error message, etc.)
+      });
+  }
+
+    </script>
+
+
+    <div class="features">
+      <div class="feature">
+        <i class="fas fa-code"><span class="material-icons-sharp">policy</span></i>
+        <h2>HealthDoc</h2>
+        <p>A modern and clean design system for developing fast and powerful web interfaces.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-gift"><span class="material-icons-sharp">check_circle_outline</span></i>
+        <h2>Features</h2>
+        <p><ul>
+          <li>Start Over</li>
+          <li>Cancel</li>
+          <li>Log</li>
+          <li>Delete</li>
+      </ul></p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-edit"></i>
+        <h3>Updates</h3>
+        <p>A modern and clean design system for developing fast and powerful web interfaces.</p>
+      </div>
+    </div>
+
+  </section>
+</body>
+</html>

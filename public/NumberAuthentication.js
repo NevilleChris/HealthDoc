@@ -14,7 +14,6 @@ window.onload=function () {
           //s is in lowercase
           window.confirmationResult=confirmationResult;
           coderesult=confirmationResult;
-        //   window.location.href = "/chat.html";
           console.log(coderesult);
           alert("Message sent");
       }).catch(function (error) {

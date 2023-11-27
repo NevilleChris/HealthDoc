@@ -15,6 +15,16 @@ body {
     margin: 0;
 }
 
+#myButton:hover {
+    background-color: #2762EB;
+    color: white; /* Change text color to contrast with the blue background */
+  }
+
+#myButton2:hover {
+    background-color: #2762EB;
+    color: white; /* Change text color to contrast with the blue background */
+  }
+
 a {
     color: #2762eb;
     text-decoration: none;

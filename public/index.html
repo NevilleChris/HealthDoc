@@ -8,12 +8,19 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/favicon.png">
   <link rel="stylesheet" type="text/css" href="phone.css">
+  <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></script>
 </head>
 
 <body>
   <section class="container">
 
+
     <form>
+        <div>
+            <img width="80px" height="80px" margin="30 auto" src="favicon.png" alt="Favicon">
+        </div>
 
       <style>
         .form-control {
@@ -43,13 +50,9 @@
           box-sizing: border-box;
         }
       </style>
-      <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></script>
 
-    </head>
 
-    </div>
+
       <div class="form-control">
         <label for="username">Username</label>
         <input type="username" id="username" placeholder="Enter your username">
@@ -59,7 +62,10 @@
         <label for="password">Password</label>
         <input type="password" id="password" placeholder="Password">
       </div>
-      <button id="myButton" class="btn" type="button">Join Us</button>
+
+      <button id="myButton" class="btn" type="button" >Join Us</button>
+
+      
     </form>
 
 <script type="module">

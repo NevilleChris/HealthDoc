@@ -54,7 +54,7 @@
 
 
       <div class="form-control">
-        <label for="Email">Email</label>
+        <label for="email">Email</label>
         <input type="email" id="email" placeholder="Enter your email">
       </div>
 
@@ -63,10 +63,9 @@
         <input type="password" id="password" placeholder="Password">
       </div>
 
-      <button id="myButton" class="btn" type="button" >Join Us</button>
-
-      <a href="login.html">
-        <p>Login here</p>
+      <button id="myButton" class="btn" type="button" >Login</button>
+      <a href="index.html">
+        <p>Sign Up here</p>
       </a>
 
       
@@ -74,9 +73,9 @@
 
 <script type="module">
                // Import the functions you need from the SDKs you need
-               import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-               import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
-                import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+            import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+            import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
   
     const firebaseConfig = {
         apiKey: "AIzaSyCr4ePLTqkp48I3NvbkBkB8vdjhYj-D5xE",
@@ -90,57 +89,38 @@
 };
 
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-  // Get reference to authentication services
-  const auth = getAuth(app);
+// Get reference to database services
+const db = getDatabase(app);
+const auth = getAuth(app);
 
-  document.getElementById("myButton").addEventListener('click', function(e) {
-    e.preventDefault();
+document.getElementById("myButton").addEventListener('click', function(e) {
+  e.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-// Create user with email and password
-createUserWithEmailAndPassword(auth, email, password)
+// Authenticate user with email and password
+signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    // User signed up successfully
+    // User authenticated successfully
     const user = userCredential.user;
-    const uid = user.uid; // Get the unique user ID
-    
-    // Additional user data you want to store
-    const userData = {
-      username: "exampleUsername", // Replace with the actual username
-      email: email, // Storing email for illustration, adjust as needed
-      // Add other user data here as needed
-    };
-
-    // Set user data in the database under 'users/' + UID
-    const userRef = ref(db, 'users/' + uid);
-    set(userRef, userData)
-      .then(() => {
-        alert("Sign up successful. Continue to login");
-        window.location.href = 'login.html';
-        // You can perform further actions here
-      })
-      .catch((error) => {
-        console.error("Error setting user data:", error);
-        alert("Error occurred while setting user data.");
-      });
+    alert("Login successful!");
+    window.location.href = 'phone.html'; // Redirect to the desired page
   })
   .catch((error) => {
-    // Handle errors
+    // Handle authentication errors
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.error("Error creating user:", errorCode, errorMessage);
-    alert("Error occurred. Please try again.");
+    console.error("Error authenticating user:", errorCode, errorMessage);
+    alert("Invalid email or password. Please try again.");
   });
 
-  });
+});
+
 </script>
-
     
     <div class="features">
       <div class="feature">

@@ -19,6 +19,14 @@ a {
     color: #2762eb;
     text-decoration: none;
 }
+.hidden {
+    display: none;
+  }
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 
 .container {
     background-color: #fff;

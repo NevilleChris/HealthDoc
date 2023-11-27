@@ -25,7 +25,7 @@ window.onload=function () {
       var code=document.getElementById('verificationCode').value;
       coderesult.confirm(code).then(function (result) {
           alert("Successfully registered");
-          window.location.href = "/chat.html";
+          window.location.href = "/Home.html";
           var user=result.user;
           console.log(user);
       }).catch(function (error) {
